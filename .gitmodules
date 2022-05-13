@@ -1,3 +1,6 @@
 [submodule "tomlc99"]
 	path = tomlc99
 	url = https://github.com/gmh5225/tomlc99
+[submodule "toml11"]
+	path = toml11
+	url = https://github.com/gmh5225/toml11
