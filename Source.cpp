@@ -159,6 +159,11 @@ void test_sample4()
     // convert the whole array into any container automatically
     std::vector<int> nums = toml::find<std::vector<int>>(data, "nums");
 
+    bool enable_1 = toml::find<bool>(data, "enable_1");
+    bool enable_2 = toml::find<bool>(data, "enable_2");
+    std::cout << "enable_1:" << enable_1 << "\n";
+    std::cout << "enable_2:" << enable_2 <<"\n";
+
     // access with STL-like manner
     if (!data.contains("foo"))
     {
