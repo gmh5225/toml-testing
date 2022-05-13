@@ -2,7 +2,11 @@
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <iostream>
+#include <ostream>
+#include <fstream>
 #include "tomlc99/toml.h"
+#include "toml11/toml.hpp"
 
 static void error(const char* msg, const char* msg1)
 {
@@ -103,11 +107,68 @@ void test_sample2()
     toml_free(conf);
 }
 
+void test_sample3()
+{
+    FILE* fp;
+    char errbuf[200];
+
+    // 1. Read and parse toml file
+    fp = fopen("sample3.toml", "r");
+    if (!fp) {
+        error("cannot open sample2.toml - ", strerror(errno));
+    }
+
+    toml_table_t* conf = toml_parse_file(fp, errbuf, sizeof(errbuf));
+    fclose(fp);
+
+    if (!conf) {
+        error("cannot parse - ", errbuf);
+    }
+
+    // 3. Extract values
+    toml_datum_t enable_1 = toml_bool_in(conf, "enable_1");
+    if (!enable_1.ok) {
+        error("cannot read conf.enable_1", "");
+    }
+
+    printf("enable_1=%d\n", enable_1.u.b);
+
+    toml_datum_t enable_2 = toml_bool_in(conf, "enable_2");
+    if (!enable_2.ok) {
+        error("cannot read conf.enable_2", "");
+    }
+
+    printf("enable_2=%d\n", enable_2.u.b);
+
+
+    // 4. Free memory
+    toml_free(conf);
+}
+
+void test_write1()
+{
+    {
+        const toml::value v{ {"a", 42} };
+        const std::string fmt = toml::format(v);
+        std::cout << "test_write1:\t";
+        std::cout << fmt << "\n";
+    }
+   
+    {
+        const toml::value v{ {"a", "b"} };
+        const std::string fmt = toml::format(v);
+        std::cout << "test_write1:\t";
+        std::cout << fmt << "\n";
+    }
+
+}
 
 int main()
 {
     test_sample();
     test_sample2();
+    test_sample3();
+    test_write1();
     system("pause");
     return 0;
 }

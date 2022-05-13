@@ -151,6 +151,7 @@
     <ClCompile Include="tomlc99\toml.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="toml11\toml.hpp" />
     <ClInclude Include="tomlc99\toml.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -16,6 +16,9 @@
     <Filter Include="tomlc99">
       <UniqueIdentifier>{6ded30bc-3d47-49c8-9388-db0bc0d7a995}</UniqueIdentifier>
     </Filter>
+    <Filter Include="toml11">
+      <UniqueIdentifier>{98f18a0d-8418-4b3f-b187-ee9cfd5d487e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -28,6 +31,9 @@
   <ItemGroup>
     <ClInclude Include="tomlc99\toml.h">
       <Filter>tomlc99</Filter>
+    </ClInclude>
+    <ClInclude Include="toml11\toml.hpp">
+      <Filter>toml11</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
