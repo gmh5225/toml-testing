@@ -145,6 +145,34 @@ void test_sample3()
     toml_free(conf);
 }
 
+void test_sample4()
+{
+    // ```toml
+    // title = "an example toml file"
+    // nums  = [3, 1, 4, 1, 5]
+    // ```
+    auto data = toml::parse("sample4.toml");
+
+    // find a value with the specified type from a table
+    std::string title = toml::find<std::string>(data, "title");
+    std::cout << title << "\n";
+    // convert the whole array into any container automatically
+    std::vector<int> nums = toml::find<std::vector<int>>(data, "nums");
+
+    // access with STL-like manner
+    if (!data.contains("foo"))
+    {
+        data["foo"] = "bar";
+    }
+
+    // pass a fallback
+    std::string name = toml::find_or<std::string>(data, "name", "not found");
+    std::cout << name << "\n";
+
+    // width-dependent formatting
+    std::cout << std::setw(80) << data << std::endl;
+}
+
 void test_write1()
 {
     {
@@ -168,6 +196,7 @@ int main()
     test_sample();
     test_sample2();
     test_sample3();
+    test_sample4();
     test_write1();
     system("pause");
     return 0;
